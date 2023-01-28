@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', 'sans serif';
+    box-sizing: border-box;
+}
+
+.word-container{
+    margin: 100px auto;
+    width: 80%;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    border: 2px solid magenta;
+}
+
+.alphabet-container{
+   width: 80%;
+   max-width: 800px;
+   flex-wrap: wrap; 
+   margin: auto;
+   display: flex;
+   justify-content: center;
+   text-align: center;
+   border: 2px solid magenta;
+}
+
+.alphabet-letter{
+    width: 5%;
+    font-size: 1.5rem;
+    padding: 6px;
+    margin: 4px;
+    border-radius: 10px;
+}
+
+.alphabet-letter:hover{
+    background-color: rgba(165, 158, 158, 0.4);
+}
+
+/* empty space (revealing letters)*/
+.letter{
+    padding: 10px 8px;
+    margin: 4px;
+    border-bottom: 2px solid black;
+}
