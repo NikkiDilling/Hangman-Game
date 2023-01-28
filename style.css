@@ -30,12 +30,15 @@
     width: 5%;
     font-size: 1.5rem;
     padding: 6px;
-    margin: 4px;
+    margin: 4px 6px;
     border-radius: 10px;
+    cursor: pointer;
+    transition: 0.4s;
 }
 
 .alphabet-letter:hover{
-    background-color: rgba(165, 158, 158, 0.4);
+    background-color:rgba(170,170,170,0.5);
+
 }
 
 /* empty space (revealing letters)*/
