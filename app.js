@@ -4,20 +4,21 @@
 //appending new letter elements here (to guess)
 const wordContainer = document.querySelector(".word-container"); 
 //Array with words to guess
-const words = ["APPLE", "COMPUTER", "BLANKET", "SHOWERCURTAIN"];
+const words = ["APPLE", "COMPUTER", "BLANKET", "SHOWERCURTAIN", "WEBSITE", "HANGMAN", "FLOWER", "CARDS", "PUPPY"];
 //Container for alphabet letters to use with event listener onclick
 const alphabet = document.querySelectorAll('.alphabet-letter');
+//variable for saving letter elements that are placed in the word-container to an array
+let lettersToGuess;
 //Variable for displaying number of mistakes to the player
 let mistakeCountDisplay = document.querySelector('.mistakes-count-num');
+const btnNewWord = document.querySelector('#btn');
 let gameStatusContainer = document.querySelector('.game-win-lose');
-let gameOverInfo = document.querySelector('.game-over');
-let gameWinInfo = document.querySelector('.game-win');
+let gameStatusInfo = document.querySelector('.game-status');
 let guessedCounter = 0;
-
 let mistakeCount = 0;
 
 //Generating random number to use as indexes to words[]
-let randomNumber = Math.floor((Math.random() * (3 - 0 + 1)) + 0);
+let randomNumber = Math.floor((Math.random() * (8 - 0 + 1)) + 0);
 //Picking the word for the user to guess
 let wordToGuess = words[randomNumber];
 //Array to save the indexes of all occurrences of a letter in a word
@@ -26,19 +27,18 @@ let letterArrayIndexes = [];
 
 function setWord(){
 
-    console.log("word: " + Math.floor((Math.random() * (4 - 0 + 1)) + 0));
-    console.log("word length: " + wordToGuess.length + "  word: " + wordToGuess);
-
     for(i=0; i < wordToGuess.length; i++){
         
         
         let letter = document.createElement('div');
         letter.classList.add('letter');
+        letter.innerText = "X";
         wordContainer.appendChild(letter);
         
         //console.log(i +"th letter created");
 
     }
+
 }
 
 
@@ -101,9 +101,6 @@ alphabet.forEach(e => {
             console.log("index of letter: " + wordToGuess.indexOf(`${e.target.innerText}`));
             */
     
-            //saving letter elements that are placed in the word-container to an array
-            let lettersToGuess = document.querySelectorAll(".letter");
-    
             //saving indexes of all occurences of the letter that is clicked into an array
             for(let i = 0; i < wordToGuess.length; i++){
     
@@ -111,7 +108,10 @@ alphabet.forEach(e => {
                     letterArrayIndexes.push(i);
                 }
             }
-    
+            
+            //saving letter elements that are placed in the word-container to an array
+            lettersToGuess = document.querySelectorAll(".letter");
+
             //Checking indexes of letters and revealing letters of the word to the player
             //outer loop going through indexes
             for(let i=0; i < letterArrayIndexes.length; i++){
@@ -121,12 +121,14 @@ alphabet.forEach(e => {
     
                     if(j === letterArrayIndexes[i]){
                         lettersToGuess[j].innerText = e.target.innerText;
+                        lettersToGuess[j].style.color = "#161616";
                         console.log('letter is placed at: ' + j);
                         //increasing guessed counter
                         guessedCounter++;
 
                         if(guessedCounter === wordToGuess.length){
-                            gameWinInfo.style.display = 'inline-block';
+                            gameStatusInfo.innerText = "You've Won!"
+                            gameStatusInfo.style.backgroundColor= "rgb(" + 13 + "," + 188 + "," + 100 + ")";
                         }
                     }
                 }
@@ -145,12 +147,14 @@ alphabet.forEach(e => {
             showHangman();
                                     
             //Updating mistake count visually 
-            if(mistakeCount <= 11){
-                mistakeCountDisplay.innerText = `${11-mistakeCount}`;
+            if(mistakeCount < 11){
+               
+                mistakeCountDisplay.innerText = `${10-mistakeCount}`;
                 
                 //checking mistake count to display "Game Over" element
-                if(mistakeCount === 11){
-                    gameOverInfo.style.display = 'inline-block';
+                if(mistakeCount === 10){
+                    gameStatusInfo.innerText = "Game Over!"
+                    gameStatusInfo.style.backgroundColor ="rgb(" + 188 + "," + 13 + "," + 13 + ")";
                 }
             }
 
@@ -164,6 +168,39 @@ alphabet.forEach(e => {
     })
 });
 
+
+btnNewWord.addEventListener('click', function(){
+    //resetting variables
+    mistakeCount = 0;
+    guessedCounter = 0;
+    randomNumber = Math.floor((Math.random() * (8 - 0 + 1)) + 0);
+    wordToGuess = words[randomNumber];
+    letterArrayIndexes = [];
+    lettersToGuess = document.querySelectorAll(".letter");
+    mistakeCountDisplay.innerText = `10`;
+    gameStatusInfo.style.backgroundColor= "white";
+
+    //resseting inactive class on alphabet
+    for(let i=0; i< alphabet.length; i++){
+        alphabet[i].classList.remove('inactive');
+    }
+
+    //resetting the hangman drawing
+    let hangmanArray = document.querySelectorAll('.drawing');
+    for(let i = 0; i < hangmanArray.length; i++){
+        console.log("deleted");
+        hangmanArray[i].style.display = "none";
+    }
+
+    //deleting all previous nodes
+    for(let i = 0; i < lettersToGuess.length; i++){
+        console.log("deleted");
+        wordContainer.removeChild(wordContainer.firstChild);
+    }
+    
+    //displaying new word
+    setWord();
+});
 
 
 //Calling function that creates letter elements

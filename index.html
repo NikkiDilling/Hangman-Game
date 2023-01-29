@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <!-- Global Font Link-->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
 
      <!-- Stylesheet-->
      <link rel="stylesheet" href="style.css">
@@ -20,18 +20,17 @@
 
     <div class="hangman-container">
 
-        <div class="rope"></div>
-        <div class="head"></div>
-        <div class="body"></div>
-        <div class="left-arm"></div>
-        <div class="right-arm"></div>
-        <div class="left-leg"></div>
-        <div class="right-leg"></div>
-        <div class="vertical-line"></div>
-        <div class="horizontal-line"></div>
-        <div class="binding-line"></div>
-        <div class="bottom-line"></div>
-
+        <div class="drawing rope"></div>
+        <div class="drawing head"></div>
+        <div class="drawing body"></div>
+        <div class="drawing left-arm"></div>
+        <div class="drawing right-arm"></div>
+        <div class="drawing left-leg"></div>
+        <div class="drawing right-leg"></div>
+        <div class="drawing vertical-line"></div>
+        <div class="drawing horizontal-line"></div>
+        <div class="drawing binding-line"></div>
+        <div class="drawing bottom-line"></div>
 
     </div>
 
@@ -41,11 +40,14 @@
     </div>
 
     <div class="game-win-lose">
-        <h2 class="game-over"> Game Over</h2>
-        <h2 class="game-win">You've Won!</h2>
+        <h2 class="game-status">default</h2>
     </div>
     
     <div class="word-container"></div>
+
+    <div class="button-container">
+        <button id="btn">New Word</button>
+    </div>
 
     <div class="alphabet-container">
         <div class="alphabet-letter">A</div>
