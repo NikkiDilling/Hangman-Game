@@ -147,12 +147,12 @@ alphabet.forEach(e => {
             showHangman();
                                     
             //Updating mistake count visually 
-            if(mistakeCount < 11){
+            if(mistakeCount <= 11){
                
-                mistakeCountDisplay.innerText = `${10-mistakeCount}`;
+                mistakeCountDisplay.innerText = `${11-mistakeCount}`;
                 
                 //checking mistake count to display "Game Over" element
-                if(mistakeCount === 10){
+                if(mistakeCount === 11){
                     gameStatusInfo.innerText = "Game Over!"
                     gameStatusInfo.style.backgroundColor ="rgb(" + 188 + "," + 13 + "," + 13 + ")";
                 }
@@ -177,7 +177,7 @@ btnNewWord.addEventListener('click', function(){
     wordToGuess = words[randomNumber];
     letterArrayIndexes = [];
     lettersToGuess = document.querySelectorAll(".letter");
-    mistakeCountDisplay.innerText = `10`;
+    mistakeCountDisplay.innerText = ` 11`;
     gameStatusInfo.style.backgroundColor= "white";
 
     //resseting inactive class on alphabet
